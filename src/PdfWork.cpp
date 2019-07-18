@@ -56,7 +56,6 @@ void PdfWork::resetSource()
 QUrl PdfWork::getSpecificURL() const
 {
     QString url = QString("image://pdf/%1?p=%2&dpi=%3").arg(_source.toString()).arg(_currentPage).arg(_resolution);
-    qDebug()<<"specific url to pdf - "<<url;
     return QUrl(url);
 }
 
@@ -68,7 +67,6 @@ void PdfWork::emitError(QString errorStr)
 
 void PdfWork::setSource(const QUrl &source)
 {
-    qDebug() << "try lo load: " << source;
     if (source == this->_source || !source.isLocalFile())
         return;
 

@@ -12,6 +12,9 @@ PdfImageProvider::~PdfImageProvider()
 
 QImage PdfImageProvider::requestImage(const QString &id, QSize *size, const QSize &requestedSize)
 {    
+    Q_UNUSED(size);
+    Q_UNUSED(requestedSize);
+
     QStringList param = id.split("?p=");
     QStringList paramPageRes = param.at(1).split("&dpi=");
     if(param.size() < 2 || paramPageRes.size() < 2) {
