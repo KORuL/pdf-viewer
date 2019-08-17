@@ -12,14 +12,11 @@ Dialog {
     function displayPdfs() {
         listOfPdfToDelete.model.clear();
         dao.retrievepdfStatistics(function(pdfs) {
-            ifNoPdf.text = "";
             if(pdfs.length !== 0) {
                 for (var i = 0; i < pdfs.length; i++) {
                     var pdf = pdfs.item(i);
                     listOfPdfToDelete.model.addPdf(pdf.id, pdf.name, pdf.path, false);
                 }
-            } else {
-                ifNoPdf.text = qsTr("You don't have any actual pdf files right now");
             }
         });
     }
@@ -28,12 +25,8 @@ Dialog {
         id: listOfPdfToDelete
         anchors.fill: dialog
 
-        topMargin: 15
-        spacing: 25
-        clip: true
-
-        contentWidth: dialog.width
-        contentHeight: dialog.height
+        topMargin: Theme.paddingLarge
+        spacing: Theme.paddingLarge
 
         header: PageHeader {
             title: qsTr("Select PDFs to delete")
@@ -56,11 +49,10 @@ Dialog {
 
         VerticalScrollDecorator {}
 
-        Label {
-            id: ifNoPdf
-            color: Theme.secondaryHighlightColor
-            y: parent.height / 2
-            anchors.horizontalCenter: parent.horizontalCenter
+        ViewPlaceholder {
+            enabled: listOfPdfToDelete.model.count == 0
+            text: "You don't have any actual pdf files right now"
+            hintText: "Pull down to add items"
         }
 
         Component.onCompleted: displayPdfs()

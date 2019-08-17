@@ -4,15 +4,11 @@
 #include "FileValidator.h"
 #include "PdfImageProvider.h"
 
+static QObject *pdfwork_provider(QQmlEngine *engine, QJSEngine *scriptEngine);
+
 int main(int argc, char *argv[])
 {
-    qmlRegisterSingletonType<PdfWork>("PdfWorker", 1, 0, "PdfWork", [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject * {
-        Q_UNUSED(engine)
-        Q_UNUSED(scriptEngine)
-
-        PdfWork *pdf = PdfWork::getInstance();
-        return pdf;
-    });
+    qmlRegisterSingletonType<PdfWork>("PdfWorker", 1, 0, "PdfWork", pdfwork_provider);
 
     qmlRegisterType<FileValidator>("FileWork", 1, 0, "FileValidator");
 
@@ -24,4 +20,13 @@ int main(int argc, char *argv[])
     view->setSource(SailfishApp::pathToMainQml());
     view->show();
     return app->exec();
+}
+
+static QObject *pdfwork_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
+{
+    Q_UNUSED(engine)
+    Q_UNUSED(scriptEngine)
+
+   PdfWork* instance = PdfWork::getInstance();
+   return instance;
 }

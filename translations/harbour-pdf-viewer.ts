@@ -9,7 +9,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/cover/CoverPage.qml" line="37"/>
+        <location filename="../qml/cover/CoverPage.qml" line="38"/>
         <source>PDF not selected</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17,12 +17,7 @@
 <context>
     <name>DeletePdfs</name>
     <message>
-        <location filename="../qml/dialogs/DeletePdfs.qml" line="22"/>
-        <source>You don&apos;t have any actual pdf files right now</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/dialogs/DeletePdfs.qml" line="39"/>
+        <location filename="../qml/dialogs/DeletePdfs.qml" line="32"/>
         <source>Select PDFs to delete</source>
         <translation type="unfinished"></translation>
     </message>
@@ -48,22 +43,17 @@
 <context>
     <name>ListPdfPage</name>
     <message>
-        <location filename="../qml/pages/ListPdfPage.qml" line="29"/>
-        <source>You don&apos;t have any actual pdf files right now</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/ListPdfPage.qml" line="52"/>
+        <location filename="../qml/pages/ListPdfPage.qml" line="44"/>
         <source>PDF List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ListPdfPage.qml" line="89"/>
+        <location filename="../qml/pages/ListPdfPage.qml" line="103"/>
         <source>Select documents</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ListPdfPage.qml" line="96"/>
+        <location filename="../qml/pages/ListPdfPage.qml" line="110"/>
         <source>Delete documents from list</source>
         <translation type="unfinished"></translation>
     </message>

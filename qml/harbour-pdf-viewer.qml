@@ -5,16 +5,6 @@ import "service"
 ApplicationWindow {
     id: applicationWindow
 
-    property int dpi: Screen.pixelDensity * 25.4
-
-    function dp(x) {
-        if(dpi < 120) {
-            return 2*x*(dpi/72);
-        } else {
-            return x*(dpi/160);
-        }
-    }
-
     Dao { id: dao }
 
     initialPage: Qt.resolvedUrl("pages/ListPdfPage.qml")

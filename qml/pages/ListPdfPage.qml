@@ -3,7 +3,6 @@ import Sailfish.Silica 1.0
 import Sailfish.Pickers 1.0
 
 import FileWork 1.0
-import "../controls" as Controls
 import "../service"
 import "../model"
 import "../dialogs"
@@ -15,7 +14,6 @@ Page {
     function displayPdfs() {
         listOfPdf.model.clear();
         dao.retrievepdfStatistics(function(pdfs) {
-            ifNoPdf.text = "";
             if(pdfs.length !== 0) {
                 for (var i = 0; i < pdfs.length; i++) {
                     var pdf = pdfs.item(i);
@@ -25,8 +23,6 @@ Page {
                     else
                         dao.removePdf(pdf.path)
                 }
-            } else {
-                ifNoPdf.text = qsTr("You don't have any actual pdf files right now");
             }
         });
     }
@@ -41,12 +37,8 @@ Page {
         id: listOfPdf
         anchors.fill: page
 
-        topMargin: 15
-        spacing: 15
-        clip: true
-
-        contentWidth: page.width
-        contentHeight: page.height
+        topMargin: Theme.paddingMedium
+        spacing: Theme.paddingMedium
 
         header: PageHeader {
             title: qsTr("PDF List")
@@ -54,36 +46,58 @@ Page {
 
         model: PdfListModel { id: pdfListModel }
         delegate: ListItem {
-            Controls.ComponentPdf {
-                anchors.horizontalCenter: parent.horizontalCenter
 
-                pixelsize: dp(15)
-                width: dp(320)
-                textTitle: name
-                textSubTitle: path
-                color: "#722164"
+            scale: mouseArea.pressed ? 0.9 : 1.0
+
+            Behavior on scale { NumberAnimation { duration: 100 } }
+
+            height: textname.height + textpath.height
+
+            Column {
+                anchors.fill: parent
+
+                Text {
+                    id: textname
+                    x: Theme.paddingMedium
+                    width : parent.width - 2*Theme.paddingMedium
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeMedium
+                    color: Theme.primaryColor
+                    text: name
+                    wrapMode: Text.Wrap
+                }
+
+                Text {
+                    id: textpath
+                    x: Theme.paddingMedium
+                    width : parent.width - 2*Theme.paddingMedium
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeSmall
+                    color: Theme.primaryColor
+                    text: path
+                    wrapMode: Text.Wrap
+                }
+            }
+
+            MouseArea {
+                id: mouseArea
+                anchors.fill: parent
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("ViewerPdfPage.qml"),
-                                   {pdfPath: path});
+                                   {pdfPath: textpath.text});
                 }
             }
         }
 
         VerticalScrollDecorator {}
 
-        Label {
-            id: ifNoPdf
-            color: Theme.secondaryHighlightColor
-            y: page.height / 2
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
-
-        PushUpMenu {
-            quickSelect: true
+        ViewPlaceholder {
+            enabled: listOfPdf.model.count == 0
+            text: "You don't have any actual pdf files right now"
+            hintText: "Pull down to add items"
         }
 
         PullDownMenu {
-            quickSelect: true
 
             MenuItem {
                 text: qsTr("Select documents")

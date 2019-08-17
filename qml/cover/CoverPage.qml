@@ -25,17 +25,18 @@ CoverBackground {
 
         visible: PdfWork.isLoaded != true
         text: qsTr("PDF Viewer")
+        font.pixelSize: Theme.fontSizeLarge
     }
 
     Label {
         id: labelError
         anchors.top: label.bottom
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.topMargin: 5
+        anchors.topMargin: Theme.paddingMedium
 
         visible: PdfWork.isLoaded != true
         text: qsTr("PDF not selected")
-        font.pixelSize: 0.6*label.font.pixelSize
+        font.pixelSize: Theme.fontSizeMedium
     }
 
     Image {

@@ -18,7 +18,6 @@ DISTFILES += \
     qml/pages/ListPdfPage.qml \
     qml/service/Dao.qml \
     qml/model/PdfListModel.qml \
-    qml/controls/ComponentPdf.qml \
     qml/dialogs/DeletePdfs.qml \
     translations/*.ts \
     qml/pages/ViewerPdfPage.qml \
